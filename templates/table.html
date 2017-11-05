@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>table</title>
+</head>
+<body>
+   <p>The row is</p>
+   <span>row is {{row}},</span>
+   <span>column is {{column}}</span>
+   <br>
+   <table cellpadding="5">
+{#      {% for row_index in range(1, row + 1) %}#}
+{#      <tr>#}
+{#         {% for column_index in range(column) %}#}
+{#         <td>#}
+{#         {{ row_index}}<br/>#}
+{#         <td>#}
+{#    {% endfor %}#}
+      {% for row in thebesttable %}
+         {% for element in row %}
+            {{ element }}
+         {% endfor %}
+         <br/>
+      {% endfor %}
+
+   </table>
+</body>
+</html>
