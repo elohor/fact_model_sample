@@ -1,30 +1,38 @@
 {% extends "base.html" %}
-{% block title %}Welcome{% endblock %}
 {% block content %}
-   <form action="{{ url_for('signup') }}" method="POST">
       <div class="container">
-         <label><b>Email</b></label>
-         <input type="text" placeholder="Enter Email" name="email" required>
+          <div class="row">
+              <div class="col-md-8">
+                <h2>{{ title }}</h2>
+                <form action="{{ url_for('signup') }}" method="POST">
+                
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Name" name="name" class="form-control" required>
+                </div>
 
-         <label><b>Username</b></label>
-         <input type="text" placeholder="Enter Username" name="username" required>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Email" name="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Username" name="username" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" placeholder="Enter Password" name="password" class="form-control" required>                </div>
 
-         <label><b>Name</b></label>
-         <input type="text" placeholder="Enter Name" name="name" required>
+                <div class="form-group inline">
+                    <input type="password" placeholder="Repeat Password" name="confirm_password" class="form-control" required>                    
+                </div>
 
-         <label><b>Password</b></label>
-         <input type="password" placeholder="Enter Password" name="password" required>
+                <div class="form-group clearfix">
+                    <a class="btn btn-danger" href="{{ url_for('home') }}">Cancel</a>
+                    <button type="submit" class="btn btn-success">Sign Up</button>
+                </div>
+            </form>
 
-         <label><b>Repeat Password</b></label>
-         <input type="password" placeholder="Repeat Password" name="password-repeat" required>
-         <input type="checkbox" checked="checked"> Remember me
-         <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-
-         <div class="clearfix">
-            <button type="button"  class="cancelbtn">Cancel</button>
-            <button type="submit" class="signupbtn">Sign Up</button>
-         </div>
+              </div>
+          </div>
       </div>
-   </form>
 
 {% endblock %}

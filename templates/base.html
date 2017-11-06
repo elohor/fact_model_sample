@@ -1,50 +1,58 @@
-<html>
-	<head>
-		<title>{% block title %}{% endblock %}</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <style>
-         body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #eee;
-         }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Francis Addai">
+	<title>{% block title %} {{ title }} {% endblock %}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
 
-         .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-         }
-         .form-signin .form-signin-heading,
-         .form-signin .checkbox {
-            margin-bottom: 10px;
-         }
-         .form-signin .checkbox {
-            font-weight: 400;
-         }
-         .form-signin .form-control {
-            position: relative;
-            box-sizing: border-box;
-            height: auto;
-            padding: 10px;
-            font-size: 16px;
-         }
-         .form-signin .form-control:focus {
-            z-index: 2;
-         }
-         .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-         }
-         .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-         }
+<body>
+	<div class="site-wrapper">
+		<div class="site-wrapper-inner">
+			<div class="cover-container">
+				<div class="masthead clearfix">
+					<div class="inner">
+						<h3 class="masthead-brand">Fact App</h3>
+						<nav>
+							<ul class="nav masthead-nav">
+								{% with links = ['home', 'facts', 'logout'] if 'user' in session else ['home', 'login', 'signup'] %}
+									{% for link in links %}
+										<li><a href="{{ url_for(link) }}">{{ link.title() }}</a></li>
+									{% endfor %}
+								{% endwith %}
+							</ul>
+						</nav>
+					</div>
+				</div>
 
-      </style>
-	</head>
-	<body>
-		{% block content %}{% endblock %}
-	</body>
+				{% with messages = get_flashed_messages(with_categories=true) %} 
+				{% if messages %}
+					<ul style="list-style-type: none">
+						{% for category, message in messages %}
+						<li class="alert alert-{{ category }}">{{ message }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %} 
+				{% endwith %} 
+				
+				{% block content %}{% endblock %}
+
+				<div class="mastfoot">
+					<div class="inner">
+						<p>Copyright &copy; 2017 All rights reserved.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+
 </html>
